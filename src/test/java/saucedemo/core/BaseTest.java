@@ -1,21 +1,16 @@
 package saucedemo.core;
 
-
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterClass;  // <-- Ubah Import ini
+import org.testng.annotations.BeforeClass; // <-- Ubah Import ini
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-
 import java.util.Properties;
-
 
 public class BaseTest {
 
-
     protected static Properties config;
-
 
     @BeforeSuite(alwaysRun = true)
     public void loadConfig() {
@@ -24,8 +19,8 @@ public class BaseTest {
         config = ConfigReader.loadProperties(env);
     }
 
-
-    @BeforeMethod(alwaysRun = true)
+    // UBAH ANOTASI INI
+    @BeforeClass(alwaysRun = true)
     @Parameters("browser")
     public void setUp(@Optional("chrome") String browser) {
         DriverManager.initDriver(browser);
@@ -33,8 +28,8 @@ public class BaseTest {
         DriverManager.getDriver().get(config.getProperty("baseUrl"));
     }
 
-
-    @AfterMethod(alwaysRun = true)
+    // UBAH ANOTASI INI
+    @AfterClass(alwaysRun = true)
     public void tearDown() {
         DriverManager.quitDriver();
     }

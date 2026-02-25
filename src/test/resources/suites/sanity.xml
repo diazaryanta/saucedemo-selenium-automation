@@ -13,6 +13,7 @@
     <test name="Sanity Test Login">
         <classes>
             <class name="saucedemo.login.LoginTest"/>
+            <class name="saucedemo.home.SauceDemoE2ETest"/>
         </classes>
     </test>
 </suite>

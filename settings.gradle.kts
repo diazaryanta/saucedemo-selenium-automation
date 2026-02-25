@@ -1,1 +1,1 @@
-rootProject.name = "learn-gradle"
+rootProject.name = "saucedemo-selenium-automation"

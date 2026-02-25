@@ -1,6 +1,5 @@
 package saucedemo;
 
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import core.BasePage;
@@ -10,40 +9,31 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import java.time.Duration; // Untuk mengatur waktu tunggu (Duration.ofSeconds)
-
+import java.time.Duration;
 
 public class LoginPage extends BasePage {
 
-
     private static final Logger log = LogManager.getLogger(LoginPage.class);
-
 
     @FindBy(id = "user-name")
     private WebElement usernameInput;
 
-
     @FindBy(id = "password")
     private WebElement passwordInput;
-
 
     @FindBy(id = "login-button")
     private WebElement loginButton;
 
-
     @FindBy(css = "[data-test='error']")
     private WebElement errorAlert;
 
-
     @FindBy(className = "title")
     private WebElement pageTitle;
-
 
     public LoginPage(WebDriver driver) {
         super(driver);
         log.info("LoginPage initialized");
     }
-
 
     public void login(String username, String password) {
         log.info("Attempting to login with username: {}", username);
@@ -56,22 +46,17 @@ public class LoginPage extends BasePage {
         log.info("Login button clicked");
     }
 
-
     public boolean isUserLoggedInSuccessfully() {
         try {
-            // Tambahkan WebDriverWait agar Selenium menunggu halaman dimuat
+            log.info("Verifying successful login...");
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-            // Tunggu sampai element judul "Products" terlihat di layar
             WebElement title = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("title")));
-
             return title.isDisplayed() && title.getText().equalsIgnoreCase("Products");
         } catch (Exception e) {
-            // Jika dalam 10 detik tidak muncul, berarti memang gagal login
+            log.warn("Login verification failed: 'Products' title not found.");
             return false;
         }
     }
-
 
     public boolean isErrorMessageDisplayed() {
         log.info("Checking if error message is displayed");
@@ -90,7 +75,6 @@ public class LoginPage extends BasePage {
         }
     }
 
-
     public String getErrorMessage() {
         log.info("Getting error message text");
         try {
@@ -104,12 +88,9 @@ public class LoginPage extends BasePage {
         }
     }
 
-
     public String getCurrentUrl() {
         String url = driver.getCurrentUrl();
-        log.info("Current URL: {}", url);
+        log.info("Current URL fetched: {}", url);
         return url;
     }
-
-
 }
