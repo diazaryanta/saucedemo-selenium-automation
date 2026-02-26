@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Smoke Test Suite" verbose="1">
+
+    <listeners>
+        <listener class-name="saucedemo.core.TestListener" />
+    </listeners>
+
+    <test name="SauceDemo End-to-End Test">
+        <classes>
+            <class name="saucedemo.login.LoginTest"/>
+
+            <class name="saucedemo.home.SauceDemoE2ETest"/>
+        </classes>
+    </test>
+</suite>
