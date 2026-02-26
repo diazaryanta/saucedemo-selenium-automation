@@ -30,9 +30,11 @@ src/
 ├── test/java/saucedemo/
 │   ├── core/                 # Test Logic (BaseTest, TestListener)
 │   └── home/                 # Test Scripts (SauceDemoE2ETest)
+│   └── login/                # Test Login (SauceDemoE2ETest)
 └── test/resources/
     ├── config/               # staging.properties (Data Uji)
-    └── suites/               # smoke.xml (Test Suite)
+    ├── data/                 # Data Login-Data-Tests.xlsx
+    └── suites/               # smoke.xml, sanity.xml, log4j2 (Test Suite)
 ```
 ---
 ## ⚙️ Persiapan dan Instalasi
