@@ -23,7 +23,6 @@ public class LoginTest extends BaseTest {
         LoginPage loginPage = new LoginPage(DriverManager.getDriver());
         loginPage.login(user, config.getProperty("password"));
 
-        // Jeda paksa 2 detik agar browser benar-benar masuk ke inventory.html
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

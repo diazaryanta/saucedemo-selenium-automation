@@ -68,20 +68,12 @@ public class SauceDemoE2ETest extends BaseTest {
     public void testCheckoutProcess() {
         cartPage.clickCheckout();
 
-        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15));
         wait.until(ExpectedConditions.urlContains("checkout-step-one"));
 
         try { Thread.sleep(2000); } catch (Exception e) {}
 
-        String fName = config.getProperty("firstName");
-        String lName = config.getProperty("lastName");
-        String zipCode = config.getProperty("zip");
-
-        System.out.println("DEBUG: Mengisi data untuk: " + fName);
-
-        checkoutPage.fillCheckoutForm(fName, lName, zipCode);
-
-        try { Thread.sleep(1000); } catch (Exception e) {}
+        checkoutPage.fillCheckoutForm(config.getProperty("firstName"), config.getProperty("lastName"), config.getProperty("zip"));
 
         checkoutPage.clickContinue();
 
