@@ -73,11 +73,20 @@ public class SauceDemoE2ETest extends BaseTest {
 
         try { Thread.sleep(2000); } catch (Exception e) {}
 
-        checkoutPage.fillCheckoutForm(config.getProperty("firstName"), config.getProperty("lastName"), config.getProperty("zip"));
+        String fName = config.getProperty("firstName");
+        String lName = config.getProperty("lastName");
+        String zipCode = config.getProperty("zip");
+
+        Assert.assertNotNull(fName, "Data firstName di staging.properties tidak terbaca!");
+
+        checkoutPage.fillCheckoutForm(fName, lName, zipCode);
+
+        try { Thread.sleep(1000); } catch (Exception e) {}
 
         checkoutPage.clickContinue();
 
         wait.until(ExpectedConditions.urlContains("checkout-step-two"));
+        Assert.assertTrue(DriverManager.getDriver().getCurrentUrl().contains("checkout-step-two"), "Gagal pindah ke halaman Overview!");
     }
 
     @Test(priority = 5, groups = {"smoke"}, description = "Test Finish Checkout", dependsOnMethods = "testCheckoutProcess")

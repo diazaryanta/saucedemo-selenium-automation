@@ -35,7 +35,6 @@ public class HomePage extends BasePage {
         addBackpackToCartBtn.click();
     }
 
-
     public void navigateToCart() {
         log.info("Clicking the shopping cart icon using JavascriptExecutor");
         waitForElementToBeVisible(clickCart);

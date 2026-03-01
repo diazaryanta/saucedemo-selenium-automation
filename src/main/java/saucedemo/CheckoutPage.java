@@ -1,7 +1,7 @@
 package saucedemo;
 
 import core.BasePage;
-import org.openqa.selenium.JavascriptExecutor; // Tambahkan import ini
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,14 +25,30 @@ public class CheckoutPage extends BasePage {
     private WebElement continueBtn;
 
     public void fillCheckoutForm(String firstName, String lastName, String postalCode) {
+        // Tunggu elemen muncul
         waitForElementToBeVisible(firstNameInput);
-        firstNameInput.sendKeys(firstName);
-        lastNameInput.sendKeys(lastName);
-        postalCodeInput.sendKeys(postalCode);
+
+        // LOG DEBUG: Pastikan data tidak NULL
+        System.out.println("DEBUG: Mengisi Form dengan -> FN: " + firstName + ", LN: " + lastName + ", Zip: " + postalCode);
+
+        // Gunakan taktik Klik -> Clear -> SendKeys untuk stabilitas
+        safeType(firstNameInput, firstName);
+        safeType(lastNameInput, lastName);
+        safeType(postalCodeInput, postalCode);
+    }
+
+    // Fungsi pembantu agar pengetikan tidak gagal
+    private void safeType(WebElement element, String text) {
+        element.click();
+        element.clear();
+        if (text != null && !text.isEmpty()) {
+            element.sendKeys(text);
+        } else {
+            System.err.println("WARNING: Teks yang akan diketik adalah NULL atau Kosong!");
+        }
     }
 
     public void clickContinue() {
-        // Gunakan Javascript click agar tombol benar-benar tertekan
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", continueBtn);
     }
