@@ -13,7 +13,8 @@ on:
      - master
      - develop
  workflow_dispatch:
-
+ schedule:
+   - cron : '0 11 * * *'
 
 jobs:
  test:
